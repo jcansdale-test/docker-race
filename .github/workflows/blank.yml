@@ -1,5 +1,7 @@
 on:
   push:
+  watch:
+    types: [stared]
 
 jobs:
   build:
