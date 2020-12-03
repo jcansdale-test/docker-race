@@ -8,7 +8,7 @@ jobs:
     env:
       IMAGE1: "ghcr.io/${{ github.repository }}:latest"
       IMAGE2: "ghcr.io/${{ github.repository }}:1.0"
-      SIZE: $((1*1024*1024))
+      SIZE: $((0*1024*1024))
 
     steps:
     - uses: actions/checkout@v2
