@@ -6,14 +6,18 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE: ghcr.io/${{ github.repository }}/docker-large-images-test
-      SIZE: $((4*1024*1024))
+      IMAGE1: "ghcr.io/${{ github.repository }}/docker-large-images-test:latest"
+      IMAGE2: "ghcr.io/${{ github.repository }}/docker-large-images-test:1.0"
+      SIZE: $((1*1024*1024))
 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.IMAGE }} --build-arg SIZE=${{ env.SIZE }}
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE1 }} --tag ${{ env.IMAGE2 }} --build-arg SIZE=${{ env.SIZE }}
 
     - run: docker login https://ghcr.io -u token -p ${{ secrets.WRITE_PACKAGES_TOKEN }}
     - name: Push the image
-      run: docker push ${{ env.IMAGE }}
+      run: |
+        docker push ${{ env.IMAGE1 }} &
+        docker push ${{ env.IMAGE2 }} &
+        wait
