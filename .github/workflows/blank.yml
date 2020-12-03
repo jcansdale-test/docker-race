@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE1: "ghcr.io/${{ github.repository }}/docker-large-images-test1:latest"
-      IMAGE2: "ghcr.io/${{ github.repository }}/docker-large-images-test2:1.0"
+      IMAGE1: "ghcr.io/${{ github.repository }}:latest"
+      IMAGE2: "ghcr.io/${{ github.repository }}:1.0"
       SIZE: $((1*1024*1024))
 
     steps:
