@@ -15,7 +15,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ env.IMAGE1 }} --tag ${{ env.IMAGE2 }} --build-arg SIZE=${{ env.SIZE }}
 
-    - run: docker login https://ghcr.io -u token -p ${{ secrets.WRITE_PACKAGES_TOKEN }}
+    - run: docker login https://ghcr.io -u token --password-stdin ${{ secrets.WRITE_PACKAGES_TOKEN }}
     - name: Push the image
       run: |
         docker push ${{ env.IMAGE1 }} &
